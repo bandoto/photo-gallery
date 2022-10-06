@@ -1,0 +1,22 @@
+@import '../../style/_variables.scss';
+
+.header {
+    padding: 20px 0;
+    border-bottom: 1px solid $darkBlue;
+
+    &__title {
+        color: $lightBlue;
+        font-size: 21px;
+        font-weight: bold;
+    }
+
+    &__body {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__list {
+        display: flex;
+        gap: 40px;
+    }
+}
