@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react';
 import { likesPhotos, dislikesPhotos } from '../../redux/features/photo/photoSlice'
-import useLocalStorage from '../../hooks/useLocalStorage';
 
 import Spinner from '../../components/spinner/Spinner';
 import PhotoItem from '../../components/photoItem/PhotoItem';

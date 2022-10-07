@@ -9,7 +9,7 @@ const AppHeader = () => {
                 <div className="header__body">
                     <Link to="/" className="header__title">Photo Gallery</Link>
                     <ul className="header__list">
-                        <li>1</li>
+                        <Link to="/">Home</Link>
                         <Link to="/likes">Likes</Link>
                     </ul>
                 </div>

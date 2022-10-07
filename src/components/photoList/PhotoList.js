@@ -2,7 +2,6 @@ import { getAllPhotos } from '../../redux/features/photo/photoSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { likesPhotos, dislikesPhotos } from '../../redux/features/photo/photoSlice'
-import useLocalStorage from '../../hooks/useLocalStorage'
 
 import Spinner from '../spinner/Spinner'
 import PhotoItem from '../photoItem/PhotoItem'
