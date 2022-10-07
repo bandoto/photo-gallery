@@ -45,6 +45,7 @@
             font-size: 21px;
         }
     }
+
 }
 
 .item-photo {
@@ -65,5 +66,15 @@
         margin-top: 20px;
         display: block;
         text-decoration: underline;
+    }
+
+    &__like {
+        padding: 5px 10px;
+        margin-top: 15px;
+        background-color: $darkBlue;
+        color: $white;
+        font-size: 21px;
+
+        cursor: pointer;
     }
 }

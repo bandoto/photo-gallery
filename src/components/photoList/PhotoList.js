@@ -1,7 +1,8 @@
 import { getAllPhotos } from '../../redux/features/photo/photoSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { likesPhotos } from '../../redux/features/photo/photoSlice'
+import { likesPhotos, dislikesPhotos } from '../../redux/features/photo/photoSlice'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 import Spinner from '../spinner/Spinner'
 import PhotoItem from '../photoItem/PhotoItem'
@@ -14,24 +15,15 @@ const PhotoList = () => {
 
     const [limit, setLimit] = useState(5)
     const [page, setPage] = useState(1)
-    const [likedPhotos, setLikedPhotos] = useState([])
 
     const dispatch = useDispatch()
     const { photos } = useSelector(state => state.photo)
     const { loading } = useSelector(state => state.photo)
+    const { likes } = useSelector(state => state.photo)
 
     useEffect(() => {
         dispatch(getAllPhotos({ limit, page }))
     }, [dispatch, limit, page])
-
-    useEffect(() => {
-        const data = window.localStorage.getItem('liked')
-        if (data !== null) setLikedPhotos(Object(JSON.parse(data)))
-    }, [])
-
-    useEffect(() => {
-        window.localStorage.setItem('liked', JSON.stringify(likedPhotos))
-    }, [likedPhotos])
 
     const renderPhotos = (arr) => {
         const photos = arr?.map(photo => {
@@ -39,7 +31,9 @@ const PhotoList = () => {
                 <PhotoItem 
                     key={photo.id}
                     photo={photo}
-                    onToggleLike={onToggleLike}
+                    addToFavorites={addToFavorites}
+                    removeFromFavorites={removeFromFavorites}
+                    favoritesChecker={favoritesChecker}
                 />
             )
         })
@@ -51,25 +45,24 @@ const PhotoList = () => {
         )
     }
 
+    const addToFavorites = (photo) => {
+        dispatch(likesPhotos(photo))
+    }
+
+    const removeFromFavorites = (photo) => {
+        dispatch(dislikesPhotos(photo))
+    }
+
+    const favoritesChecker = (id) => {
+        const boolean = likes.some(photo => photo.id === id)
+        return boolean
+    }
+
     const onChangePage = (pageValue) => {
         if (pageValue < 1) {
             setPage(1)
         } else {
             setPage(pageValue)
-        }
-    }
-
-    const onToggleLike = (photo) => {
-        const id = likedPhotos.find(item => item.id === photo.id)
-        if (id) {
-            setLikedPhotos(likedPhotos.filter(item => item.id !== photo.id))
-            const local = JSON.parse(window.localStorage.getItem('liked'))
-            const elem = local.findIndex(item => item.id === photo.id)
-            local.splice(elem, 1)
-            window.localStorage.setItem('liked', JSON.stringify(local))
-        } else {
-            setLikedPhotos([...likedPhotos, photo])
-            // dispatch(likesPhotos(photo))
         }
     }
 

@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { likesPhotos, dislikesPhotos } from '../../redux/features/photo/photoSlice'
+import useLocalStorage from '../../hooks/useLocalStorage';
 
+import Spinner from '../../components/spinner/Spinner';
 import PhotoItem from '../../components/photoItem/PhotoItem';
 
 const LikesPage = () => {
 
-    const [likedPhotos, setLikedPhotos] = useState([])
+    const { likes } = useSelector(state => state.photo)
+    const { loading } = useSelector(state => state.photo)
 
-    useEffect(() => {
-        const data = window.localStorage.getItem('liked')
-        setLikedPhotos(Object(JSON.parse(data)))
-    }, [])
+    const dispatch = useDispatch()
 
     const renderPhotos = (arr) => {
         const photos = arr?.map(photo => {
@@ -17,7 +19,9 @@ const LikesPage = () => {
                 <PhotoItem 
                     key={photo.id}
                     photo={photo}
-                    onToggleLike={onToggleLike}
+                    addToFavorites={addToFavorites}
+                    removeFromFavorites={removeFromFavorites}
+                    favoritesChecker={favoritesChecker}
                 />
             )
         })
@@ -29,20 +33,27 @@ const LikesPage = () => {
         )
     }
 
-    const onToggleLike = (photo) => {
-        setLikedPhotos(likedPhotos.filter(item => item.id !== photo.id))
-        const local = JSON.parse(window.localStorage.getItem('liked'))
-        const elem = local.findIndex(item => item.id === photo.id)
-        local.splice(elem, 1)
-        window.localStorage.setItem('liked', JSON.stringify(local))
+    const favoritesChecker = (id) => {
+        const boolean = likes.some(photo => photo.id === id)
+        return boolean
     }
 
-    const content = renderPhotos(likedPhotos)
+    const addToFavorites = (photo) => {
+        dispatch(likesPhotos(photo))
+    }
+
+    const removeFromFavorites = (photo) => {
+        dispatch(dislikesPhotos(photo))
+    }
+
+    const content = renderPhotos(likes)
+    const isLoading = loading ? <Spinner /> : null
 
     return (
         <section className="photo">
             <div className="container">
-                {likedPhotos ? content : <span>no liked photos</span>}
+                {isLoading}
+                {likes.length > 0 ? content : <span>You dont have any favourite photos yet</span>}
             </div>
         </section>
     );

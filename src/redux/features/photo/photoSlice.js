@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 
+const items = localStorage.getItem("LIKED_PHOTOS") !== null ? JSON.parse(localStorage.getItem('LIKED_PHOTOS')) : []
+
 const initialState = {
     photos: [],
-    likes: [],
+    likes: items,
     photo: '',
     loading: false
 }
@@ -36,12 +38,16 @@ export const photoSlice = createSlice({
     name: 'photo',
     initialState,
     reducers: {
-        // likesPhotos: (state, action) => {
-        //     state.likes.push(action.payload)
-        // },
-        // dislikesPhotos: (state, action) => {
-        //     state.likes = state.likes.filter(item => item.id !== action.payload.id)
-        // }
+        likesPhotos: (state, action) => {
+            state.likes.push(action.payload)
+
+            localStorage.setItem("LIKED_PHOTOS", JSON.stringify(state.likes.map(item => item)))
+        },
+        dislikesPhotos: (state, action) => {
+            state.likes = state.likes.filter(item => item.id !== action.payload.id)
+
+            localStorage.setItem("LIKED_PHOTOS", JSON.stringify(state.likes.map(item => item)))
+        }
     },
     extraReducers: {
         [getAllPhotos.pending]: (state) => {
@@ -71,4 +77,6 @@ const { actions, reducer } = photoSlice
 
 export default reducer
 export const {
+    likesPhotos,
+    dislikesPhotos
 } = actions

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-import { FcLike, FcDislike } from 'react-icons/fc'
 
-const PhotoItem = ({ photo, onToggleLike }) => {
+const PhotoItem = ({ photo, addToFavorites, removeFromFavorites, favoritesChecker }) => {
     
     return (
         <div key={photo.id} className="photo__item item-photo">
@@ -11,9 +10,16 @@ const PhotoItem = ({ photo, onToggleLike }) => {
                 </div>
                 <div className="item-photo__author">Author: {photo.author}</div>
             </Link>
-            <div className="item-photo__like" onClick={() => onToggleLike(photo)}>
-                <FcLike size={32} />
-            </div>
+            {
+                favoritesChecker(photo.id) ? 
+                    <button className="item-photo__like" onClick={() => removeFromFavorites(photo)}>
+                        Remove from favorite
+                    </button> 
+                        : 
+                    <button className="item-photo__like" onClick={() => addToFavorites(photo)}>
+                        Add to favorite
+                    </button>
+            }
         </div>
     );
 };
