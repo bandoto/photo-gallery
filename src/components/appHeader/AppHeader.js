@@ -1,11 +1,8 @@
 import { Link, NavLink } from "react-router-dom"
-import { useState } from "react"
 
 import './appHeader.scss'
 
 const AppHeader = () => {
-
-    // const [menuActive, setMenuActive] = useState(false)
 
     const activeStyles = {
         textDecoration: 'underline'
