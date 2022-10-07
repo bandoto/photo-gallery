@@ -12,5 +12,6 @@ TOOLS:
   - Local Storage
   
  PROBLEMS: 
-  - how to connect redux with localstorage (solved)
-  - large size images in api, may not appear immediately
+  - How to connect redux with localstorage (solved)
+  - Large size images in api, may not appear immediately
+  - I don't know how many pictures are in the api, so I didn't limit the number of pages
