@@ -44,16 +44,13 @@ a {
 
 .back {
     margin-top: 20px;
-    width: 100%;
     text-align: right;
+    background-color: $lightBlue;
+    color: $white;
+    border-radius: 15px;
+    padding: 10px 15px;
     display: block;
-    span {
-        background-color: $lightBlue;
-        color: $white;
-        padding: 10px 15px;
-        border-radius: 15px;
-        display: inline-block;
-    }
+    margin-left: auto;
 }
 
 .main {

@@ -23,7 +23,9 @@ const SinglePhoto = () => {
     return (
         <div className="single-photo">
             <div className="container">
-                <Link to="/" className="back"><span>Back</span></Link>
+                <button className="back">
+                    <Link to="/">Back</Link>
+                </button>
                 {
                     loading ? <Spinner /> : 
                     <div className="single-photo__body">
