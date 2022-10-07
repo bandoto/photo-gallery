@@ -1,16 +1,38 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
+import { useState } from "react"
 
 import './appHeader.scss'
 
 const AppHeader = () => {
+
+    // const [menuActive, setMenuActive] = useState(false)
+
+    const activeStyles = {
+        textDecoration: 'underline'
+    }
+
     return (
         <header className="header">
             <div className="container">
                 <div className="header__body">
                     <Link to="/" className="header__title">Photo Gallery</Link>
                     <ul className="header__list">
-                        <Link to="/">Home</Link>
-                        <Link to="/likes">Likes</Link>
+                        <li>
+                            <NavLink 
+                                to="/"
+                                style={({isActive}) => isActive ? activeStyles : undefined}
+                                >
+                                Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink 
+                                to="/likes"
+                                style={({isActive}) => isActive ? activeStyles : undefined}
+                                  >
+                                Likes
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>

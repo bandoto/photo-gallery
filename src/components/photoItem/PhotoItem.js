@@ -4,7 +4,7 @@ const PhotoItem = ({ photo, addToFavorites, removeFromFavorites, favoritesChecke
     
     return (
         <div key={photo.id} className="photo__item item-photo">
-            <Link to={`/${photo.id}`}>
+            <Link to={`/photo/${photo.id}`}>
                 <div className="item-photo__img">
                     <img src={photo.download_url} alt="" />
                 </div>

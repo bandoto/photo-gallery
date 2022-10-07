@@ -7,6 +7,21 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 20px;
+
+        &-enter {
+            opacity: 0;
+        }
+        &-enter-active {
+            opacity: 1;
+            transition: opacity 500ms ease-in;
+        }
+        &-exit {
+            opacity: 1;
+        }
+        &-exit-active {
+            opacity: 0;
+            transition: opacity 500ms ease-in;
+        }
     }
 
     &__item {
@@ -16,8 +31,17 @@
         text-align: center;
         background-color: $lightBlue;
         color: $white;
+        padding-bottom: 20px;
 
-        padding: 20px;
+        @media (max-width: 768px) {
+            flex: 0 1 calc(50% - 20px);
+            width: calc(50% - 20px);
+        }
+
+        @media (max-width: 500px) {
+            flex: 0 1 calc(100% - 20px);
+            width: calc(100% - 20px);
+        }
     }
 
     &__pagination {
@@ -56,7 +80,7 @@
         margin-bottom: 20px;
         img {
             width: 100%;
-            height: 270px;
+            max-height: 260px;
             object-fit: contain;
             display: block;
         }

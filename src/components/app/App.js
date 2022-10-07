@@ -20,9 +20,13 @@ const App = () => {
                         element={<LikesPage />}>
                     </Route>
                     <Route
-                        path="/:id"
-                        exact 
+                        path="/photo/:id"
+                        exact
                         element={<SinglePhoto />}>
+                    </Route>
+                    <Route
+                        path="*"
+                        element={<h1>Page Not Found</h1>}>
                     </Route>
                 </Routes>
             </main>

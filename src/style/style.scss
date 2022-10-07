@@ -33,9 +33,13 @@ a {
 
 .container {
     width: 100%;
-    max-width: 1420px;
+    max-width: 1220px;
     padding: 0 10px;
     margin: 0 auto;
+}
+
+.wrapper {
+    height: 100vh;
 }
 
 .back {
@@ -50,4 +54,9 @@ a {
         border-radius: 15px;
         display: inline-block;
     }
+}
+
+.main {
+    height: calc(100vh - 65.8px);
+    overflow-y: scroll;
 }

@@ -3,9 +3,10 @@
 .header {
     padding: 20px 0;
     border-bottom: 1px solid $darkBlue;
+    background-color: $lightBlue;
+    color: $white;
 
     &__title {
-        color: $lightBlue;
         font-size: 21px;
         font-weight: bold;
     }
@@ -13,10 +14,15 @@
     &__body {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     &__list {
         display: flex;
         gap: 40px;
+
+        a {
+            color: $white   
+        }
     }
 }
