@@ -53,8 +53,7 @@ const PhotoList = () => {
     }
 
     const favoritesChecker = (id) => {
-        const boolean = likes.some(photo => photo.id === id)
-        return boolean
+        return likes.some(photo => photo.id === id)
     }
 
     const onChangePage = (pageValue) => {
